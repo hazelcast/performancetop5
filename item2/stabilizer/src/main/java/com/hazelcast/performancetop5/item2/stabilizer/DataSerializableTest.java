@@ -4,8 +4,8 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.logging.ILogger;
 import com.hazelcast.logging.Logger;
-import com.hazelcast.performancetop5.item2.serializable.Order;
-import com.hazelcast.performancetop5.item2.serializable.OrderLine;
+import com.hazelcast.performancetop5.item2.dataserializable.Order;
+import com.hazelcast.performancetop5.item2.dataserializable.OrderLine;
 import com.hazelcast.stabilizer.tests.TestContext;
 import com.hazelcast.stabilizer.tests.TestRunner;
 import com.hazelcast.stabilizer.tests.annotations.Performance;
@@ -18,9 +18,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class SerializableTest {
 
-    private final static ILogger log = Logger.getLogger(SerializableTest.class);
+public class DataSerializableTest {
+    private final static ILogger log = Logger.getLogger(DataSerializableTest.class);
 
     private final AtomicLong operations = new AtomicLong();
     private String[] products;
@@ -28,7 +28,7 @@ public class SerializableTest {
     //props
     public int threadCount = 10;
     public int logFrequency = 10000;
-    public int performanceUpdateFrequency = 1000;
+    public int performanceUpdateFrequency = 100;
     public int maxOrders = 100 * 1000;
     public int maxOrderLines = 5;
 
@@ -105,7 +105,7 @@ public class SerializableTest {
     }
 
     public static void main(String[] args) throws Throwable {
-        SerializableTest test = new SerializableTest();
+        DataSerializableTest test = new DataSerializableTest();
         new TestRunner(test).run();
     }
 }

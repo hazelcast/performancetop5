@@ -34,13 +34,7 @@
             <artifactId>stabilizer</artifactId>
             <version>${hazelcast-stabilizer.version}</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId></groupId>
-                    <artifactId>sample-artifactAB</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+            </dependency>
 
         <dependency>
             <groupId>com.hazelcast</groupId>
@@ -80,13 +74,12 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <excludeTransitive>true</excludeTransitive>
+                            <excludeTransitive>false</excludeTransitive>
                             <!-- the com.hazelcast libraries are excluded, because an explicit version is configured
                                  in the workerdir/stabilizer.properties. If you want to provide your own hazelcast
                                  dependencies, set HAZELCAST_VERSION_SPEC to none and remove 'com.hazelcast' from
                                  the excludedGroupIds -->
-                            <includeGroupIds>performance-top-5.item2</includeGroupIds>
-                            <excludeGroupIds>com.hazelcast.stabilizer</excludeGroupIds>
+                           <includeGroupIds>performance-top-5</includeGroupIds>
                             <outputDirectory>${project.build.directory}</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>

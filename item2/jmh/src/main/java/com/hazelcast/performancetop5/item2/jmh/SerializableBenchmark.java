@@ -47,7 +47,7 @@ public class SerializableBenchmark {
         Random random = new Random();
         for (int k = 0; k < OPERATIONS_PER_INVOCATION; k++) {
             Order order = createNewOrder(random);
-            orderMap.put(order.orderId, order);
+            orderMap.set(order.orderId, order);
         }
     }
 
