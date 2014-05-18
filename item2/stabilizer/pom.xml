@@ -8,7 +8,7 @@
     <description>Hazelcast Performance Top 5, Item 2: Stabilizer</description>
 
     <parent>
-        <groupId>com.hazelcast.performance-top-5</groupId>
+        <groupId>performance-top-5</groupId>
         <artifactId>item2</artifactId>
         <version>1.0</version>
     </parent>
@@ -24,7 +24,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.hazelcast.performance-top-5</groupId>
+            <groupId>performance-top-5</groupId>
             <artifactId>item2-common</artifactId>
             <version>1.0</version>
         </dependency>
@@ -34,6 +34,12 @@
             <artifactId>stabilizer</artifactId>
             <version>${hazelcast-stabilizer.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId></groupId>
+                    <artifactId>sample-artifactAB</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -79,7 +85,8 @@
                                  in the workerdir/stabilizer.properties. If you want to provide your own hazelcast
                                  dependencies, set HAZELCAST_VERSION_SPEC to none and remove 'com.hazelcast' from
                                  the excludedGroupIds -->
-                            <excludeGroupIds>com.hazelcast.stabilizer,com.hazelcast</excludeGroupIds>
+                            <includeGroupIds>performance-top-5.item2</includeGroupIds>
+                            <excludeGroupIds>com.hazelcast.stabilizer</excludeGroupIds>
                             <outputDirectory>${project.build.directory}</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>

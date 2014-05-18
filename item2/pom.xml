@@ -9,7 +9,7 @@
     <description>Hazelcast Performance Top 10, Item 2: IdentifiedDataSerializable</description>
 
     <parent>
-        <groupId>com.hazelcast.performance-top-5</groupId>
+        <groupId>performance-top-5</groupId>
         <artifactId>root</artifactId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>

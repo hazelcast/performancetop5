@@ -9,7 +9,7 @@
     <description>Hazelcast Performance Top 5, Item 2: Common classes</description>
 
     <parent>
-        <groupId>com.hazelcast.performance-top-5</groupId>
+        <groupId>performance-top-5</groupId>
         <artifactId>item2</artifactId>
         <version>1.0</version>
     </parent>

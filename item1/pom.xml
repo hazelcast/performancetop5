@@ -10,7 +10,7 @@
     <description>Hazelcast Performance Top 5, Item 1: Map.put vs Map.set</description>
 
     <parent>
-        <groupId>com.hazelcast.performance-top-5</groupId>
+        <groupId>performance-top-5</groupId>
         <artifactId>root</artifactId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
@@ -21,6 +21,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
         </dependency>
     </dependencies>
 
