@@ -16,4 +16,7 @@ reports/
 atlassian-ide-plugin.xml
 hazelcast-ra/*.log
 hazelcast-ra/*.epoch
-
+logs/
+workers/
+agents.txt
+failures*.txt

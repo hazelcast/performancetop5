@@ -1,30 +1,24 @@
-package org.sample;
+package com.hazelcast.performancetop5.item1;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.MapConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
-import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OperationsPerInvocation;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.annotations.Warmup;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 @State(value = Scope.Thread)
-@OperationsPerInvocation(DistributedMapPutSetBenchmark.OPERATIONS_PER_INVOCATION)
-public class DistributedMapPutSetBenchmark {
+@OperationsPerInvocation(LocalMapPutSetBenchmark.OPERATIONS_PER_INVOCATION)
+public class LocalMapPutSetBenchmark {
 
-    public static final long OPERATIONS_PER_INVOCATION = 50000;
+    public static final int OPERATIONS_PER_INVOCATION = 500000;
 
     private HazelcastInstance hz;
     private IMap<Integer, String> map;
@@ -44,12 +38,7 @@ public class DistributedMapPutSetBenchmark {
         //config.getNetworkConfig().getJoin().getTcpIpConfig().addMember("192.168.1.107");
         //config.getNetworkConfig().getJoin().getTcpIpConfig().addMember("127.0.0.1");
         config.addMapConfig(mapConfig);
-
         hz = Hazelcast.newHazelcastInstance(config);
-        Hazelcast.newHazelcastInstance(config);
-        Hazelcast.newHazelcastInstance(config);
-        Hazelcast.newHazelcastInstance(config);
-        Hazelcast.newHazelcastInstance(config);
 
         map = hz.getMap(mapConfig.getName());
 

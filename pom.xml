@@ -1,20 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hazelcast</groupId>
-    <artifactId>performance-top-10</artifactId>
+    <groupId>com.hazelcast.performance-top-5</groupId>
+    <artifactId>root</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
-    <name>Hazelcast Performance Top 10</name>
-
+    <name>Hazelcast Performance Top 5</name>
 
     <properties>
-        <hazelcast.version>3.3-SNAPSHOT</hazelcast.version>
+        <hazelcast.version>3.2.1</hazelcast.version>
         <jmh.version>0.4.2</jmh.version>
         <log4j.version>1.2.17</log4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hazelcast-stabilizer.version>0.3-SNAPSHOT</hazelcast-stabilizer.version>
+        <java.version>1.6</java.version>
     </properties>
 
     <repositories>
@@ -27,6 +29,7 @@
 
     <modules>
         <module>item1</module>
+        <module>item2</module>
     </modules>
 
     <dependencies>
@@ -55,36 +58,6 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>microbenchmarks</finalName>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.openjdk.jmh.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/services/javax.annotation.processing.Processor</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
 
