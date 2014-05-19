@@ -1,6 +1,7 @@
 package com.hazelcast.performancetop5.item2.jmh;
 
 
+import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -29,7 +30,9 @@ public class DataSerializableBenchmark {
 
     @Setup
     public void setUp() {
-        hz = Hazelcast.newHazelcastInstance();
+        Config config = new Config();
+    //    config.getSerializationConfig().setAllowUnsafe(true).setUseNativeByteOrder(true);
+        hz = Hazelcast.newHazelcastInstance(config);
         orderMap = hz.getMap("orders");
         products = new String[100];
 
@@ -38,7 +41,7 @@ public class DataSerializableBenchmark {
         }
 
         Random random = new Random();
-        for(int k=0;k<maxOrders;k++){
+        for (int k = 0; k < maxOrders; k++) {
             Order order = createNewOrder(random);
             orderMap.put(order.orderId, order);
         }

@@ -35,6 +35,7 @@ public class IdentifiedDataSerializableBenchmark {
         Config config = new Config();
         OrderDataSerializableFactory orderFactory = new OrderDataSerializableFactory();
         config.getSerializationConfig().addDataSerializableFactory(OrderDataSerializableFactory.ID, orderFactory);
+     //   config.getSerializationConfig().setAllowUnsafe(true).setUseNativeByteOrder(true);
         hz = Hazelcast.newHazelcastInstance(config);
         orderMap = hz.getMap("orders");
         products = new String[100];
