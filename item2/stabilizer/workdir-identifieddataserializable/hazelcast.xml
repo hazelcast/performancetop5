@@ -17,6 +17,8 @@
     </network>
 
     <serialization>
+        <!-- use-native-byte-order>true</use-native-byte-order>
+        <allow-unsafe>true</allow-unsafe -->
         <data-serializable-factories>
             <data-serializable-factory factory-id="1">
                 com.hazelcast.performancetop5.item2.identifieddataserializable.OrderDataSerializableFactory

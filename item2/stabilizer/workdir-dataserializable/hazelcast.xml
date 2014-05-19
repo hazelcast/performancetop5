@@ -16,6 +16,9 @@
         </join>
     </network>
 
-
+    <!-- serialization>
+        <use-native-byte-order>true</use-native-byte-order>
+        <allow-unsafe>true</allow-unsafe>
+    </serialization -->
 
 </hazelcast>

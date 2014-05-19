@@ -19,7 +19,7 @@ import java.util.Random;
 @State(value = Scope.Thread)
 @OperationsPerInvocation(SerializableBenchmark.OPERATIONS_PER_INVOCATION)
 public class SerializableBenchmark {
-    public static final int OPERATIONS_PER_INVOCATION = 100000;
+    public static final int OPERATIONS_PER_INVOCATION = 500000;
 
     private HazelcastInstance hz;
     private IMap<Object, Object> orderMap;
@@ -35,6 +35,12 @@ public class SerializableBenchmark {
         for (int k = 0; k < 100; k++) {
             products[k] = "product-" + k;
         }
+
+        Random random = new Random();
+        for(int k=0;k<maxOrders;k++){
+            Order order = createNewOrder(random);
+            orderMap.put(order.orderId, order);
+        }
     }
 
     @TearDown
@@ -48,6 +54,15 @@ public class SerializableBenchmark {
         for (int k = 0; k < OPERATIONS_PER_INVOCATION; k++) {
             Order order = createNewOrder(random);
             orderMap.set(order.orderId, order);
+        }
+    }
+
+    @GenerateMicroBenchmark
+    public void readPerformance() {
+        Random random = new Random();
+        for (int k = 0; k < OPERATIONS_PER_INVOCATION; k++) {
+            long orderId = random.nextInt(maxOrders);
+            orderMap.get(orderId);
         }
     }
 

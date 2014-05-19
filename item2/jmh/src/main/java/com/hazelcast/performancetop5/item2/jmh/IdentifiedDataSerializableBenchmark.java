@@ -5,6 +5,7 @@ import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
+import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
 import com.hazelcast.performancetop5.item2.identifieddataserializable.Order;
 import com.hazelcast.performancetop5.item2.identifieddataserializable.OrderDataSerializableFactory;
 import com.hazelcast.performancetop5.item2.identifieddataserializable.OrderLine;
@@ -21,7 +22,7 @@ import java.util.Random;
 @State(value = Scope.Thread)
 @OperationsPerInvocation(IdentifiedDataSerializableBenchmark.OPERATIONS_PER_INVOCATION)
 public class IdentifiedDataSerializableBenchmark {
-    public static final int OPERATIONS_PER_INVOCATION = 100000;
+    public static final int OPERATIONS_PER_INVOCATION = 500000;
 
     private HazelcastInstance hz;
     private IMap<Object, Object> orderMap;
@@ -40,6 +41,12 @@ public class IdentifiedDataSerializableBenchmark {
         for (int k = 0; k < 100; k++) {
             products[k] = "product-" + k;
         }
+
+        Random random = new Random();
+        for(int k=0;k<maxOrders;k++){
+            Order order = createNewOrder(random);
+            orderMap.put(order.orderId, order);
+        }
     }
 
     @TearDown
@@ -53,6 +60,15 @@ public class IdentifiedDataSerializableBenchmark {
         for (int k = 0; k < OPERATIONS_PER_INVOCATION; k++) {
             Order order = createNewOrder(random);
             orderMap.set(order.orderId, order);
+        }
+    }
+
+    @GenerateMicroBenchmark
+    public void readPerformance() {
+        Random random = new Random();
+        for (int k = 0; k < OPERATIONS_PER_INVOCATION; k++) {
+            long orderId = random.nextInt(maxOrders);
+            orderMap.get(orderId);
         }
     }
 
@@ -70,5 +86,14 @@ public class IdentifiedDataSerializableBenchmark {
         }
 
         return order;
+    }
+
+    public static void main(String[] args){
+        IdentifiedDataSerializableBenchmark benchmark = new IdentifiedDataSerializableBenchmark();
+        benchmark.setUp();
+        for(int k=0;k<1000;k++){
+            benchmark.writePerformance();
+        }
+
     }
 }
