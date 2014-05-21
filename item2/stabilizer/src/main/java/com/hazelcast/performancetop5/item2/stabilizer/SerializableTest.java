@@ -93,10 +93,10 @@ public class SerializableTest {
         public void run() {
             long iteration = 0;
             while (!testContext.isStopped()) {
-                if(shouldWrite(iteration)) {
+                if (shouldWrite(iteration)) {
                     Order order = createNewOrder(random);
                     orderMap.set(order.orderId, order);
-                }else{
+                } else {
                     long orderId = random.nextInt(maxOrders);
                     orderMap.get(orderId);
                 }
@@ -127,13 +127,14 @@ public class SerializableTest {
         Order order = new Order();
         order.orderId = random.nextInt(maxOrders);
         order.date = new Date();
-
-        int orderlineCount = random.nextInt(maxOrderLines);
-        for (int k = 0; k < orderlineCount; k++) {
-            OrderLine orderLine = new OrderLine();
-            orderLine.amount = random.nextInt(100);
-            orderLine.product = products[random.nextInt(products.length)];
-            order.orderLines.add(orderLine);
+        if (maxOrderLines > 0) {
+            int orderlineCount = random.nextInt(maxOrderLines);
+            for (int k = 0; k < orderlineCount; k++) {
+                OrderLine orderLine = new OrderLine();
+                orderLine.amount = random.nextInt(100);
+                orderLine.product = products[random.nextInt(products.length)];
+                order.orderLines.add(orderLine);
+            }
         }
 
         return order;

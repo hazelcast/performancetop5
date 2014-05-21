@@ -127,12 +127,14 @@ public class IdentifiedDataSerializableTest {
         order.orderId = random.nextInt(maxOrders);
         order.date = new Date();
 
-        int orderlineCount = random.nextInt(maxOrderLines);
-        for (int k = 0; k < orderlineCount; k++) {
-            OrderLine orderLine = new OrderLine();
-            orderLine.amount = random.nextInt(100);
-            orderLine.product = products[random.nextInt(products.length)];
-            order.orderLines.add(orderLine);
+        if(maxOrderLines>0) {
+            int orderlineCount = random.nextInt(maxOrderLines);
+            for (int k = 0; k < orderlineCount; k++) {
+                OrderLine orderLine = new OrderLine();
+                orderLine.amount = random.nextInt(100);
+                orderLine.product = products[random.nextInt(products.length)];
+                order.orderLines.add(orderLine);
+            }
         }
 
         return order;
